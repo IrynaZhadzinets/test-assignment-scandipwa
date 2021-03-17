@@ -1,0 +1,79 @@
+%remain-steps{
+    &:before {
+      content: counter(stepNum);
+    }
+}
+.MultiSteps{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    table-layout: fixed;
+    width: 100%;
+    height: 6rem;
+    padding-bottom: 0.5rem;
+    background: var(--secondary-base-color);
+
+  > li{
+    counter-increment: stepNum;
+    text-align: center;
+    display: table-cell;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    color: black;
+
+    &:before{
+      content: '\f00c';
+      content: '\2713;';
+      content: '\10003';
+      content: '\10004';
+      content: '\2713';
+      display: block;
+      padding: 0;
+      color: white;
+      background-color: var(--primary-base-color);
+      width: 3rem;
+      height: 3rem;
+      left: 50%;
+      transform: translate(-50%);
+      line-height: 3rem;
+      position: absolute;
+      top: -3rem;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 50%;
+    }
+
+    &.active{
+      @extend %remain-steps;
+      &:before{
+        background-color: var(--primary-base-color);
+        border-color: var(--primary-base-color);
+        color: white;
+      }
+
+      ~ li{
+        color: var(--secondary-dark-color);
+        @extend %remain-steps;
+        &:before{
+          background-color: #dddddd;
+          border-color: #dddddd;
+        }
+      }
+    }
+  }
+
+  > div {
+    position: relative;
+    display: inline-block;
+    flex: 1 1;
+    top: -3rem;
+    height: 3px;
+    background-color: #dddddd;
+
+    &.progress{
+        background-color: var(--primary-base-color);
+        transition: ease-out 0.5s;
+      }
+  }
+}
